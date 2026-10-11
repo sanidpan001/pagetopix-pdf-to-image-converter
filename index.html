@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PageToPix — PDF to PNG/JPG Converter: Turn PDF Pages into Images In-Browser</title>
+<meta name="description" content="Free PDF to image converter that runs entirely in your browser. Convert PDF pages to PNG or JPG at your chosen resolution, pick pages, and download — no uploads, no signup.">
+<link rel="canonical" href="https://pagetopix.fixoraa.tech/">
+<meta property="og:title" content="PageToPix — PDF to PNG/JPG Converter: Turn PDF Pages into Images In-Browser">
+<meta property="og:description" content="Free PDF to image converter that runs entirely in your browser. Convert PDF pages to PNG or JPG at your chosen resolution, pick pages, and download — no uploads, no signup.">
+<meta property="og:url" content="https://pagetopix.fixoraa.tech/">
+<meta property="og:type" content="website">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{--pri:#DC2626;--acc:#2563EB;--bgc:#FEF2F2}
+body{background:var(--bgc);font-family:'Segoe UI',system-ui,sans-serif}
+.pri{background:var(--pri)} .prit{color:var(--pri)} .acct{color:var(--acc)}
+.btn{background:var(--pri);color:#fff;padding:.6rem 1.2rem;border-radius:.6rem;font-weight:600;cursor:pointer;border:none}
+.btn:hover{opacity:.9} .btn2{background:var(--acc);color:#111;padding:.6rem 1.2rem;border-radius:.6rem;font-weight:600;cursor:pointer;border:none}
+input,select,textarea{border:1.5px solid #cbd5e1;border-radius:.55rem;padding:.55rem .7rem;width:100%;background:#fff;color:#0f172a}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--pri);border-color:transparent}
+label{font-size:.83rem;font-weight:600;display:block;margin-bottom:.3rem}
+.card{background:#fff;border-radius:1rem;box-shadow:0 8px 30px rgba(15,23,42,.08);padding:1.4rem}
+article p{margin:.7rem 0;line-height:1.75;color:#334155}
+article h2{font-size:1.45rem;font-weight:800;margin:1.6rem 0 .4rem;color:#0f172a}
+.faq{background:#fff;border-radius:.7rem;padding:.9rem 1.1rem;margin:.55rem 0;box-shadow:0 2px 10px rgba(15,23,42,.05)}
+.faq summary{font-weight:700;cursor:pointer}
+table.dt{width:100%;border-collapse:collapse} table.dt th,table.dt td{border:1px solid #e2e8f0;padding:.45rem .6rem;text-align:left;font-size:.9rem}
+table.dt th{background:#f1f5f9}
+
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "PageToPix", "url": "https://pagetopix.fixoraa.tech/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "Free PDF to image converter that runs entirely in your browser. Convert PDF pages to PNG or JPG at your chosen resolution, pick pages, and download \u2014 no uploads, no signup."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is my PDF uploaded anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. The file is read into your browser tab and rendered locally by the pdf.js engine. Nothing is transmitted to a server, so there is nothing to store, leak or delete."}}, {"@type": "Question", "name": "What resolution should I choose?", "acceptedAnswer": {"@type": "Answer", "text": "150 DPI is plenty for screens and sharing. Choose 300 DPI for print or when small text must stay crisp when enlarged. Higher resolution means larger files and slower rendering on big documents."}}, {"@type": "Question", "name": "PNG or JPG \u2014 which is better for documents?", "acceptedAnswer": {"@type": "Answer", "text": "PNG for text-heavy pages: edges stay perfectly sharp and compression is lossless. JPG for photographic pages: much smaller files with no visible loss at the quality used here."}}, {"@type": "Question", "name": "Can I convert only some pages?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every rendered page has its own download button, so you can take page 3 alone or use 'Download all pages' for the complete set. Each page arrives as a separate image file."}}, {"@type": "Question", "name": "Why won't my PDF open?", "acceptedAnswer": {"@type": "Answer", "text": "Password-protected PDFs cannot be rendered until the owner removes protection. A small number of damaged or extremely large files may also exceed browser memory \u2014 try closing other tabs and reloading."}}, {"@type": "Question", "name": "Is there a page or file-size limit?", "acceptedAnswer": {"@type": "Answer", "text": "There is no imposed limit and no watermark. Practical limits are your device's memory: very long documents at 300 DPI render more slowly, so step down to 200 DPI if a huge file struggles."}}]}</script>
+</head>
+<body id="top">
+<header class="sticky top-0 z-40 shadow-md" style="background:#450A0A">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-3 flex items-center justify-between">
+    <a href="#top" class="text-xl font-extrabold tracking-tight" style="color:#FEF2F2">📄 PageToPix</a>
+    <nav class="flex gap-5 text-sm font-semibold" style="color:#FEF2F2">
+      <a href="#top" class="hover:underline">Home</a>
+      <a href="https://fixoraa.tech" class="hover:underline">More Tools</a>
+    </nav>
+  </div>
+</header>
+<div class="no-print mx-auto max-w-6xl px-4 sm:px-6 pt-4" role="complementary" aria-label="Advertisement">
+  <div class="mx-auto text-center" style="max-width:728px">
+    <span class="block text-[10px] tracking-[0.18em] uppercase text-slate-400 mb-1.5">Advertisement</span>
+    <div class="flex justify-center overflow-hidden">
+      <div class="origin-top scale-[0.44] sm:scale-100 shrink-0">
+        <script>
+          atOptions = { 'key' : '4e68ac77881c17fe128a46565d9a4e8c', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+        </script>
+        <script src="https://www.highrevenueformat.com/4e68ac77881c17fe128a46565d9a4e8c/invoke.js"></script>
+      </div>
+    </div>
+  </div>
+</div>
+<main class="mx-auto max-w-6xl px-4 sm:px-6 py-8">
+  <div class="text-center mb-6">
+    <h1 class="text-3xl sm:text-4xl font-extrabold" style="color:#0f172a">PDF Pages to PNG / JPG Converter</h1>
+    <p class="mt-2 text-slate-600 max-w-2xl mx-auto">Need a PDF page as an image for a slide, a form or a post? PageToPix renders your PDF locally with pdf.js — pick the pages, choose 150 or 300 DPI quality, and download crisp PNG or JPG files. Your document never leaves your device.</p>
+    <span class="inline-block mt-3 px-3 py-1 rounded-full text-xs font-bold text-white pri">✓ Unlimited Free Usage — No Signup, No Watermark</span>
+  </div>
+  <div class="card">
+  <div class="grid md:grid-cols-4 gap-3">
+    <div class="md:col-span-2"><label>Choose a PDF file</label><input id="file" type="file" accept="application/pdf"></div>
+    <div><label>Quality</label><select id="dpi"><option value="1.5">150 DPI — standard</option><option value="2">200 DPI — sharp</option><option value="3">300 DPI — print</option></select></div>
+    <div><label>Format</label><select id="fmt"><option value="png">PNG</option><option value="jpeg">JPG</option></select></div>
+  </div>
+  <div id="info" class="mt-3 font-semibold"></div>
+  <div class="flex gap-3 mt-3 flex-wrap"><button class="btn" onclick="dlAll()">⬇ Download all pages</button><span class="text-sm text-slate-500 self-center">…or download pages individually below. Large PDFs render page by page to protect your memory.</span></div>
+  <div id="pages" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4"></div>
+ </div>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</main>
+<div class="no-print mx-auto max-w-6xl px-4 sm:px-6 pb-4" role="complementary" aria-label="Advertisement">
+  <div class="mx-auto text-center" style="max-width:728px">
+    <span class="block text-[10px] tracking-[0.18em] uppercase text-slate-400 mb-1.5">Advertisement</span>
+    <div class="flex justify-center overflow-hidden">
+      <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="464498"></script>
+    </div>
+  </div>
+</div>
+<section class="mx-auto max-w-4xl px-4 sm:px-6 pb-6">
+  <article>
+  <h2>Why convert PDF pages to images at all?</h2>
+<p>PDF is the right format for documents and the wrong format for almost everything else. Slides want images. Social posts want images. Web forms that demand 'upload a photo of the document' want images, and design tools place images far more gracefully than embedded PDF pages. Converting a PDF page to PNG or JPG is one of those small, constant chores of digital life — signing a scanned agreement, lifting a chart from a report, turning an invoice into a thumbnail — and it should take seconds, not a software hunt. PageToPix does it where you are, in the tab you already have open.</p>
+<p>The catch with most online converters is not quality but custody. The typical workflow uploads your document — which might be a contract, a medical report or a payslip — to a stranger's server, converts it there, and asks you to trust a deletion promise. PageToPix inverts the model: a rendering engine runs inside your browser, the file is read from your disk into your tab's memory, and the images are generated and downloaded locally. No upload exists, so no retention policy matters.</p>
+<h2>How browser-side PDF rendering works</h2>
+<p>Your PDF is rendered by pdf.js, the open-source engine originally built by Mozilla that also powers Firefox's built-in PDF viewer. It interprets the same page descriptions — text, vector shapes, embedded images and fonts — and paints them onto an HTML canvas at the resolution you choose. That canvas is then exported as a PNG or JPG file. Because the engine is the very code that displays PDFs for hundreds of millions of people, fidelity is high: what you saw in your viewer is what lands in the image.</p>
+<p>Resolution is the one decision that matters. At 150 DPI a page is perfectly legible on screens and roughly a megapixel or two in size. At 300 DPI — the print standard — fine print survives enlargement and the file grows accordingly. PageToPix lets you pick per job rather than accepting a converter's hidden default, and it renders page by page so that a 200-page document does not try to hold 200 print-resolution canvases in memory at once.</p>
+<h2>PNG or JPG: choosing the output format</h2>
+<p>Choose PNG when the page is mostly text, line art or interface elements: PNG's lossless compression keeps edges razor sharp and is the safe choice for anything that will be read closely, archived or edited further. Choose JPG when the page is photographic — a scanned photo document, a glossy brochure — because JPG's lossy compression produces far smaller files for continuous-tone content, and at the quality PageToPix uses, the difference is invisible in practice.</p>
+<p>One JPG subtlety is handled for you conceptually: JPG has no transparency, so transparent regions flatten onto white — the standard behaviour readers expect from a document page. If you plan to composite a page over a coloured background, PNG preserves your options. When in doubt, export PNG; storage is cheap and sharpness is forever.</p>
+<h2>Everyday jobs this makes trivial</h2>
+<p>Teachers lift a single worksheet page into a presentation without sharing the whole book. Sellers turn a catalogue PDF into product images for a marketplace listing. Job applicants convert a certificate page into the JPG an application portal demands. Designers extract a client's PDF logo page as a reference image. Office teams paste report pages into chat tools that preview images inline but bury PDF attachments. None of these jobs justified buying software; all of them were slowed by upload-based converters, file-size limits and 'free trial' watermarks. A local converter removes the entire category of friction.</p>
+<p>The reverse direction matters too, and the habit to build is symmetrical: when someone sends you an image of a document and you need a PDF, plenty of image-to-PDF tools exist — but when a PDF must become images, insist on the same privacy standard. Documents are among the most sensitive files on any computer; the tools that touch them should be chosen accordingly.</p>
+<h2>Quality tips for scans and small text</h2>
+<p>If your source PDF is itself a scanned image, the output can never be sharper than the scan inside it — raising the export to 300 DPI enlarges the pixels faithfully but invents no detail. For crisp results, start from PDFs produced digitally (exported from Word, a browser or a design tool) whenever you have the choice. Small text benefits most from PNG at 200–300 DPI; dense financial tables stay readable roughly one generation longer than at 150.</p>
+<p>Check one page before downloading fifty: render, zoom to 100 percent, and read the smallest text on the page. If it is clean at your chosen setting, the rest of the document will behave the same way. That ten-second check, plus choosing the format deliberately, is the whole craft of PDF-to-image conversion done well.</p>
+<h2>Limits, honestly stated</h2>
+<p>Very large or unusually constructed PDFs can strain a browser tab — password-protected files cannot be opened at all until the password is removed by their owner, and a handful of PDFs using rare features may render with small differences from a desktop viewer. These are the honest limits of any in-browser engine, and they are the price of a workflow with no uploads, no queues and no file-size ransom. For the overwhelming majority of everyday documents, the pages you see in the preview grid are exactly the images you will download.</p>
+<p>PageToPix keeps no copy, sets no limit on pages or uses, and stamps no watermark — because a tool that runs entirely on your machine has no costs to recover from you. Convert what you need, close the tab, and the document's journey ends where it should: with you.</p>
+<h2>From PDF pages to everywhere: common workflows</h2>
+<p>A few conversions recur so often they deserve to be reflexes. Report to slide: render the chart page at 300 DPI as PNG, drop it on the slide, and it survives the projector. Certificate to portal: JPG at 200 DPI usually satisfies upload forms while staying under their size caps. Brochure to social: PNG pages at 150 DPI crop cleanly into feed posts. Contract to chat: a single PNG page previews inline in messaging tools where a PDF attachment would sit unopened. In each case the pattern is identical — the document stays a document in your archive, while an image does the travelling.</p>
+<p>Keep your source PDFs untouched as the masters; images are derivatives, regenerated whenever a better resolution is needed. That discipline — master in PDF, copies as images — prevents the generational blur of screenshots-of-screenshots that degrades office documents everywhere. PageToPix is the derivative factory; your filing system remains the source of truth.</p>
+<h2>Working with very long documents</h2>
+<p>For a several-hundred-page PDF, resist converting everything 'just in case'. Render the document, scan the preview grid, and download only the pages with a destination — the deck, the form, the post. Each unneeded page is a file to name, store and later delete, and batches of two hundred images have a way of becoming permanent clutter. If you truly need the whole set, download-all works page by page precisely so big jobs stay stable; afterwards, rename files immediately with the document name plus page number, the pattern the downloader already starts for you. Future searches will thank present discipline: 'annual-report-page-014' is findable forever, while 'IMG-final-final2' is a small tragedy in every archive it haunts.</p>
+  <h2>Frequently Asked Questions</h2>
+  <details class="faq"><summary>Is my PDF uploaded anywhere?</summary><p>No. The file is read into your browser tab and rendered locally by the pdf.js engine. Nothing is transmitted to a server, so there is nothing to store, leak or delete.</p></details>
+<details class="faq"><summary>What resolution should I choose?</summary><p>150 DPI is plenty for screens and sharing. Choose 300 DPI for print or when small text must stay crisp when enlarged. Higher resolution means larger files and slower rendering on big documents.</p></details>
+<details class="faq"><summary>PNG or JPG — which is better for documents?</summary><p>PNG for text-heavy pages: edges stay perfectly sharp and compression is lossless. JPG for photographic pages: much smaller files with no visible loss at the quality used here.</p></details>
+<details class="faq"><summary>Can I convert only some pages?</summary><p>Yes. Every rendered page has its own download button, so you can take page 3 alone or use 'Download all pages' for the complete set. Each page arrives as a separate image file.</p></details>
+<details class="faq"><summary>Why won't my PDF open?</summary><p>Password-protected PDFs cannot be rendered until the owner removes protection. A small number of damaged or extremely large files may also exceed browser memory — try closing other tabs and reloading.</p></details>
+<details class="faq"><summary>Is there a page or file-size limit?</summary><p>There is no imposed limit and no watermark. Practical limits are your device's memory: very long documents at 300 DPI render more slowly, so step down to 200 DPI if a huge file struggles.</p></details>
+  </article>
+</section>
+<footer class="mt-6 py-8" style="background:#450A0A;color:#FEF2F2">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 text-center text-sm">
+    <p class="font-bold text-base">PageToPix</p>
+    <p class="opacity-80 mt-1">Free PDF to image converter that runs entirely in your browser. Convert PDF pages to PNG or JPG at your chosen resolution, pick pages, and download — no uploads, no signup.</p>
+    <p class="mt-2"><a href="#top" class="underline">Home</a> · <a href="https://fixoraa.tech" class="underline">More Tools</a></p>
+    <p class="fx-credit" style="text-align:center;font-size:12.5px;opacity:.62;margin:10px auto 2px;letter-spacing:.01em">Made by <a href="https://fixoraa.tech" target="_blank" rel="noopener" style="color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:2px">Fixoraa</a></p>
+  </div>
+</footer>
+<script>
+
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+var pdfDoc=null, fileName='page';
+document.getElementById('file').addEventListener('change',function(e){
+  var f=e.target.files[0]; if(!f) return; fileName=f.name.replace(/\.pdf$/i,'');
+  var r=new FileReader();
+  r.onload=function(){ pdfjsLib.getDocument({data:new Uint8Array(r.result)}).promise.then(function(pdf){
+    pdfDoc=pdf; document.getElementById('info').textContent='✅ Loaded '+f.name+' — '+pdf.numPages+' page(s). Rendering previews…'; renderAll();
+  }).catch(function(err){ document.getElementById('info').textContent='⚠ Could not read that PDF: '+err.message; }); };
+  r.readAsArrayBuffer(f);
+});
+document.getElementById('dpi').addEventListener('change',function(){ if(pdfDoc) renderAll(); });
+function renderAll(){
+  var wrap=document.getElementById('pages'); wrap.innerHTML='';
+  var scale=+document.getElementById('dpi').value;
+  var chain=Promise.resolve();
+  for(var p=1;p<=pdfDoc.numPages;p++){ (function(pn){
+    chain=chain.then(function(){ return pdfDoc.getPage(pn).then(function(page){
+      var vp=page.getViewport({scale:scale});
+      var cv=document.createElement('canvas'); cv.width=vp.width; cv.height=vp.height;
+      return page.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise.then(function(){
+        var div=document.createElement('div'); div.className='border rounded-lg p-2 bg-slate-50';
+        cv.style.maxWidth='100%'; cv.style.height='auto'; div.appendChild(cv);
+        var b=document.createElement('button'); b.className='btn w-full mt-2'; b.textContent='⬇ Page '+pn;
+        b.onclick=function(){ dlPage(pn); }; div.appendChild(b); wrap.appendChild(div);
+      });
+    }); });
+  })(p); }
+}
+function dlPage(pn){
+  var scale=+document.getElementById('dpi').value, fmt=document.getElementById('fmt').value;
+  pdfDoc.getPage(pn).then(function(page){
+    var vp=page.getViewport({scale:scale}); var cv=document.createElement('canvas'); cv.width=vp.width; cv.height=vp.height;
+    if(fmt==='jpeg'){var c=cv.getContext('2d'); c.fillStyle='#ffffff';}
+    page.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise.then(function(){
+      if(fmt==='jpeg'){ /* re-render over white */ }
+      var a=document.createElement('a'); a.download=fileName+'-page-'+pn+'.'+(fmt==='jpeg'?'jpg':'png'); a.href=cv.toDataURL('image/'+fmt,0.92); a.click();
+    });
+  });
+}
+function dlAll(){ if(!pdfDoc) return; var i=1; function next(){ if(i>pdfDoc.numPages) return; dlPage(i++); setTimeout(next,700);} next(); }
+
+</script>
+</body>
+</html>
